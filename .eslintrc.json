@@ -1,0 +1,31 @@
+// {
+//     "extends": "airbnb",
+//     "plugins": [
+//         "react"
+//     ],
+//     "parserOptions": {
+//         "ecmaFeatures": {
+//             "jsx": true
+//         },
+//         "ecmaVersion": 6
+//     }
+// }
+
+{
+    "extends": ["eslint:recommended", "plugin:react/recommended"],
+    "plugins": ["react"],
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 6
+    },
+    "env": {
+        "es6": true,
+        "browser": true,
+        "node": true
+    },
+    "rules": {
+        "indent": "off"
+    }
+}
