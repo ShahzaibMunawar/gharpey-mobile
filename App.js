@@ -1,71 +1,62 @@
-import React from "react";
-import {
-  View,
-  UIManager,
-  LayoutAnimation,
-  StyleSheet,
-  AsyncStorage
-} from "react-native";
-import AppAuth from "react-native-app-auth";
-import { AppLoading } from "expo";
-import firebase from "firebase";
-import LoginForm from "./src/components/LoginForm";
-import Signup from "./src/components/Signup";
+import React, { useState } from "react";
+import { View } from "react-native";
 import * as Font from "expo-font";
-import { Ionicons } from "@expo/vector-icons";
-import { createAppContainer } from "react-navigation";
-import { createStackNavigator } from "react-navigation-stack";
-import { Container, Header, Content, Button, Text } from "native-base";
-import { Spinner } from "./src/commen";
-import { Provider } from "react-redux";
-import { persistStore } from "redux-persist";
-import immutableTransform from "redux-persist-transform-immutable";
-import store from "./App/Store";
-import Root from "./App/Root";
+import { Text} from "native-base";
+// import LoginForm from "./src/components/LoginForm";
+import Router from "./Router";
+import {Provider} from 'react-redux';
+import store from './store/index';
+import ResultsShowScreen from "./src/screens/ResultsShowScreen";
+import ProductsShowScreen from "./src/screens/ProductsShowScreen";
+import searchScreen from "./src/screens/searchScreen";
+import CartIcon from "./src/components/CartIcon";
+import cartScreen from "./src/screens/cartScreen";
+import AllProducts from "./src/screens/AllProducts";
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
+
+const Tab = createBottomTabNavigator();
+
+function MyTabs() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="Home" component={searchScreen} />
+      <Tab.Screen name="cart" component={cartScreen} />
+    </Tab.Navigator>
+  );
+}
 export default class App extends React.Component {
-  componentDidMount() {
-    persistStore(store, {
-      storage: AsyncStorage,
-      transforms: [immutableTransform()],
-      whitelist: ["auth"]
-    });
-  }
   constructor(props) {
     super(props);
     this.state = {
-      isReady: false,
-      loggedIn: false,
-      hasLoggedInOnce: false,
-      accessToken: "",
-      accessTokenExpirationDate: "",
-      refreshToken: "",
-      loading: true
+      loading: true,
+      isLoggedIn: false
     };
   }
-  // async componentWillMount() {
-  //   await Expo.Font.loadAsync({
-  //     Roboto: require("native-base/Fonts/Roboto.ttf")
-  //   });
-  //   this.setState({ loading: false });
-  // }
+
+  async componentWillMount() {
+    await Font.loadAsync({
+      Roboto: require("native-base/Fonts/Roboto.ttf"),
+      Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf")
+    });
+    this.setState({ loading: false });
+  }
+
   render() {
-    // if (this.state.loading) {
-    //   return <Expo.AppLoading />;
-    // }
-    return (
-      <Provider store={store}>
-        <Root />
-      </Provider>
-    );
+
+    if (this.state.loading) {
+      return (
+        <View>
+          <Text>Please Wait while loading</Text>
+        </View>
+      );
+    } else {
+      return (
+        <Provider store={store}>
+           <Router />
+        </Provider>
+      );
+    }
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
-  }
-});

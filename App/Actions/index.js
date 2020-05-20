@@ -11,6 +11,7 @@ import {
 } from "./Types";
 
 export function userFetch(auth) {
+  console.log("auth tokn" + auth);
   return dispatch => {
     dispatch(userRequest(auth));
     return fetch(USER_URL, {
@@ -29,8 +30,44 @@ export function userFetch(auth) {
         else dispatch(userSuccess(auth, json));
       })
       .catch(error => {
+        alert("user fetch error");
         console.log("catch ERROR", error);
         dispatch(userFailure(auth, error));
+      });
+  };
+}
+
+export function loginFetch(email, password) {
+  console.log(email + " ==== " + password);
+  console.log("user url == " + USER_URL);
+  console.log("login url == " + LOGIN_URL);
+  console.log("OAUTH client id == " + OAUTH_CLIENT_ID);
+  console.log("OAUTH_CLIENT_SECRECT id == " + OAUTH_CLIENT_SECRECT);
+
+  return dispatch => {
+    dispatch(loginRequest(email, password));
+    return fetch(LOGIN_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        username: email,
+        password: password,
+        device_name: "andriod"
+      })
+    })
+      .then(response => response.json())
+      .then(json => {
+        console.log("json Datta", json);
+        if (json.hasOwnProperty("error"))
+          dispatch(loginFailure(email, json.message));
+        else dispatch(loginSuccess(email, json));
+      })
+      .catch(error => {
+        alert("login error");
+        console.log("catch ERROR", error);
+        dispatch(loginFailure(email, error));
       });
   };
 }
@@ -50,38 +87,6 @@ export function userFailure(auth, error) {
   return {
     type: USER_FAILURE,
     payload: { auth, error }
-  };
-}
-
-export function loginFetch(email, password) {
-  console.log(email + " ==== " + password);
-  return dispatch => {
-    dispatch(loginRequest(email, password));
-    return fetch(LOGIN_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        grant_type: "password",
-        client_id: OAUTH_CLIENT_ID,
-        client_secret: OAUTH_CLIENT_SECRECT,
-        username: email,
-        password: password,
-        scope: ""
-      })
-    })
-      .then(response => response.json())
-      .then(json => {
-        console.log("json", email, json);
-        if (json.hasOwnProperty("error"))
-          dispatch(loginFailure(email, json.message));
-        else dispatch(loginSuccess(email, json));
-      })
-      .catch(error => {
-        console.log("ERROR", error);
-        dispatch(loginFailure(email, error));
-      });
   };
 }
 export function loginRequest(email, password) {

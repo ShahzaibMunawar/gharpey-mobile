@@ -1,2 +1,3 @@
-export const OAUTH_CLIENT_ID = 6;
-export const OAUTH_CLIENT_SECRECT = "Wb3CajBmsJcF113ODUMBcR2mctuN0NAqSH5L5AMY";
+export const OAUTH_CLIENT_ID = 1;
+export const OAUTH_CLIENT_SECRECT =
+  "alBejnyR2n2ZFPpnpzuLxIP6GP7vGjAWHuA7A0Vug2RyGDahqGC1tcZaVAQPPk4zb5CiBGdhbS0H0Tdn";

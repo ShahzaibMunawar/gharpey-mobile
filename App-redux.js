@@ -22,8 +22,9 @@ import { persistStore } from "redux-persist";
 import immutableTransform from "redux-persist-transform-immutable";
 import store from "./App/Store";
 import Root from "./App/Root";
+import Router from "./Router";
 
-export default class App extends React.Component {
+export default class AppRedux extends React.Component {
   componentDidMount() {
     persistStore(store, {
       storage: AsyncStorage,
@@ -55,7 +56,7 @@ export default class App extends React.Component {
     // }
     return (
       <Provider store={store}>
-        <Root />
+       <Root />
       </Provider>
     );
   }

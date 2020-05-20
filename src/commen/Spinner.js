@@ -1,4 +1,4 @@
-import React from "React";
+import React from "react";
 import { TextInput, View, Text, ActivityIndicator } from "react-native";
 
 const Spinner = ({size}) => {
