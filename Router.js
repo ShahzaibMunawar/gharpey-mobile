@@ -1,10 +1,8 @@
-import React from 'react';
+import React from "react";
 
-
-import {  createAppContainer,createSwitchNavigator } from "react-navigation";
-import { createBottomTabNavigator } from 'react-navigation-tabs';
+import { createAppContainer, createSwitchNavigator } from "react-navigation";
+import { createBottomTabNavigator } from "react-navigation-tabs";
 import { createStackNavigator } from "react-navigation-stack";
-
 
 import ProductsShowScreen from "./src/screens/ProductsShowScreen";
 import searchScreen from "./src/screens/searchScreen";
@@ -17,137 +15,124 @@ import LoginForm from "./src/components/LoginForm";
 
 import Icon from "react-native-vector-icons/FontAwesome";
 
+const AuthStack = createStackNavigator({
+  LoginScreen: {
+    screen: LoginForm,
+    navigationOptions: {
+      headerShown: false,
+      tabBarVisible: false
+    }
+  }
+});
 
-const AuthStack = createStackNavigator(
-  {
-    LoginScreen:{
-      screen: LoginForm,
-      navigationOptions: {
-        headerTitle:'Please Login',
-        tabBarVisible:false
+const HomeStack = createStackNavigator({
+  Home: {
+    screen: searchScreen,
+    navigationOptions: {
+      headerShown: false,
+      headerLeft: null
+    }
+  },
+  AllProducts: {
+    screen: AllProducts,
+    navigationOptions: {
+      headerTitle: "Products",
+      headerRight: () => <CartIcon />,
+      headerStyle: {
+        backgroundColor: "#922c88"
+      }
+    }
+  },
+  ProductsShowScreen: {
+    screen: ProductsShowScreen,
+    navigationOptions: {
+      headerTitle: "Product Details",
+      headerRight: () => <CartIcon />,
+      headerStyle: {
+        backgroundColor: "#922c88"
       }
     }
   }
-);
-
-const HomeStack = createStackNavigator(
-  {
-    Home:{
-      screen: searchScreen,
-      navigationOptions: {
-        headerShown: false,
-        headerLeft: null
-
-      }
-    },
-    AllProducts: {
-      screen: AllProducts,
-      navigationOptions: {
-        headerTitle: "Products",
-        headerRight:()=> <CartIcon />,
-        headerStyle: {
-          backgroundColor: '#922c88'
-        }
-      }
-    },
-    ProductsShowScreen: {
-      screen: ProductsShowScreen,
-      navigationOptions: {
-        headerTitle: "Product Details",
-        headerRight: () => <CartIcon/>,
-        headerStyle: {
-          backgroundColor: '#922c88'
-        }
+});
+const ProfileStack = createStackNavigator({
+  Profile: {
+    screen: ProfileScreen,
+    navigationOptions: {
+      headerTitle: "Profile",
+      headerRight: () => <CartIcon />,
+      headerStyle: {
+        backgroundColor: "#922c88"
       }
     }
   }
-);
-const ProfileStack = createStackNavigator(
-  {
-    Profile:{
-      screen: ProfileScreen,
-      navigationOptions: {
-        headerTitle: "Profile",
-        headerRight:()=> <CartIcon />,
-        headerStyle: {
-          backgroundColor: '#922c88'
-        }
+});
+const OrderStack = createStackNavigator({
+  order: {
+    screen: OrderScreen,
+    navigationOptions: {
+      headerTitle: "My Orders",
+      headerRight: () => <CartIcon />,
+      headerStyle: {
+        backgroundColor: "#922c88"
       }
     }
   }
-);
-const OrderStack = createStackNavigator(
-  {
-    order:{
-      screen: OrderScreen,
-      navigationOptions: {
-        headerTitle: "My Orders",
-        headerRight:()=> <CartIcon />,
-        headerStyle: {
-          backgroundColor: '#922c88'
-        }
+});
+
+const CartStack = createStackNavigator({
+  cartScreen: {
+    screen: cartScreen,
+    navigationOptions: {
+      headerTitle: "Cart",
+      headerRight: () => <CartIcon />,
+      headerStyle: {
+        backgroundColor: "#922c88"
       }
     }
   }
-);
-
-const CartStack = createStackNavigator(
-  {
-    cartScreen:{
-      screen: cartScreen,
-      navigationOptions: {
-        headerTitle: "Cart",
-        headerRight:()=> <CartIcon />,
-        headerStyle: {
-          backgroundColor: '#922c88'
-        }
-      }
-    },
-
-  }
-);
+});
 const MainTabs = createBottomTabNavigator({
   Home: {
     screen: HomeStack,
     navigationOptions: {
-      tabBarLabel: 'Home',
-    tabBarIcon: ({tintColor}) => (
-      <Icon name="home" color={tintColor} size={24}/>
-    )
-    },
+      tabBarLabel: "Home",
+      tabBarIcon: ({ tintColor }) => (
+        <Icon name="home" color={tintColor} size={24} />
+      )
+    }
   },
   Order: {
     screen: OrderStack,
     navigationOptions: {
-      tabBarLabel: 'My Orders',
-      tabBarIcon: ({tintColor}) => (
-        <Icon name="list-alt" color={tintColor} size={24}/>
+      tabBarLabel: "My Orders",
+      tabBarIcon: ({ tintColor }) => (
+        <Icon name="list-alt" color={tintColor} size={24} />
       )
-    },
+    }
   },
   Cart: {
     screen: CartStack,
     navigationOptions: {
-      tabBarLabel: 'Cart',
-      tabBarIcon: ({tintColor}) => (
-        <Icon name="shopping-cart" color={tintColor} size={24}/>
+      tabBarLabel: "Cart",
+      tabBarIcon: ({ tintColor }) => (
+        <Icon name="shopping-cart" color={tintColor} size={24} />
       )
-    },
+    }
   },
   Profile: {
-  screen: ProfileStack,
+    screen: ProfileStack,
     navigationOptions: {
-    tabBarLabel: 'Profile',
-      tabBarIcon: ({tintColor}) => (
-        <Icon name="user" color={tintColor} size={24}/>
+      tabBarLabel: "Profile",
+      tabBarIcon: ({ tintColor }) => (
+        <Icon name="user" color={tintColor} size={24} />
       )
-  },
-},
+    }
+  }
 });
 const SwitchApp = createSwitchNavigator({
-  Auth: {
-    screen: AuthStack
-  },
+  // Auth: {
+  //   screen: AuthStack
+  // },
   SwitchApp: {
     screen: MainTabs
   }
@@ -214,4 +199,3 @@ export default createAppContainer(SwitchApp);
 //     // }
 //   }
 // );
-
