@@ -1,4 +1,7 @@
-const INIT = {};
+const INIT = {
+  cart: [],
+  total: 0
+};
 
 const cartItems = (state = [], action) => {
   switch (action.type) {

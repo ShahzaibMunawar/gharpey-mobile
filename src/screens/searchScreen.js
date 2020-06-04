@@ -26,6 +26,7 @@ import SearchBar from "../components/SearchBar";
 import Swiper from "react-native-swiper";
 
 const searchScreen = () => {
+  console.disableYellowBox = true;
   const [term, setTerm] = useState("");
   // const [searchApi, errorMsg, results] = useResults();
   const [searchApi, errorMsg, results] = useProducts();
@@ -48,7 +49,7 @@ const searchScreen = () => {
 
   return (
     <Container>
-      <Header style={{ marginTop: 24, backgroundColor: "#922c88" }}>
+      <Header style={{ backgroundColor: "#922c88" }}>
         <Body>
           <Image
             source={require("../../assets/logo.png")}

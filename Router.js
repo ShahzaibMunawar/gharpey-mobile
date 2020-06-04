@@ -59,6 +59,7 @@ const ProfileStack = createStackNavigator({
     screen: ProfileScreen,
     navigationOptions: {
       headerTitle: "Profile",
+      headerTintColor: "#fff",
       headerRight: () => <CartIcon />,
       headerStyle: {
         backgroundColor: "#922c88"
@@ -71,6 +72,7 @@ const OrderStack = createStackNavigator({
     screen: OrderScreen,
     navigationOptions: {
       headerTitle: "My Orders",
+      headerTintColor: "#fff",
       headerRight: () => <CartIcon />,
       headerStyle: {
         backgroundColor: "#922c88"
@@ -84,9 +86,11 @@ const CartStack = createStackNavigator({
     screen: cartScreen,
     navigationOptions: {
       headerTitle: "Cart",
+      headerTintColor: "#fff",
       headerRight: () => <CartIcon />,
       headerStyle: {
-        backgroundColor: "#922c88"
+        backgroundColor: "#922c88",
+        color: "#ffffff"
       }
     }
   }
@@ -96,6 +100,7 @@ const MainTabs = createBottomTabNavigator({
     screen: HomeStack,
     navigationOptions: {
       tabBarLabel: "Home",
+      headerTintColor: "#fff",
       tabBarIcon: ({ tintColor }) => (
         <Icon name="home" color={tintColor} size={24} />
       )
@@ -105,6 +110,7 @@ const MainTabs = createBottomTabNavigator({
     screen: OrderStack,
     navigationOptions: {
       tabBarLabel: "My Orders",
+      headerTintColor: "#fff",
       tabBarIcon: ({ tintColor }) => (
         <Icon name="list-alt" color={tintColor} size={24} />
       )
@@ -114,6 +120,7 @@ const MainTabs = createBottomTabNavigator({
     screen: CartStack,
     navigationOptions: {
       tabBarLabel: "Cart",
+      headerTintColor: "#fff",
       tabBarIcon: ({ tintColor }) => (
         <Icon name="shopping-cart" color={tintColor} size={24} />
       )
@@ -123,6 +130,7 @@ const MainTabs = createBottomTabNavigator({
     screen: ProfileStack,
     navigationOptions: {
       tabBarLabel: "Profile",
+      headerTintColor: "#fff",
       tabBarIcon: ({ tintColor }) => (
         <Icon name="user" color={tintColor} size={24} />
       )
