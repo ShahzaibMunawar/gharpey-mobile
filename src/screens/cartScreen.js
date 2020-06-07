@@ -1,46 +1,81 @@
-import React, { Component} from "react";
+import React, { Component } from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  Container,
+  Header,
+  Content,
+  Card,
+  CardItem,
+  Thumbnail,
+  Text,
+  Button,
+  Icon,
+  Left,
+  Body,
+  Right
+} from "native-base";
 
 import { connect } from "react-redux";
 import { FlatList } from "react-native-gesture-handler";
-import CartItem from "../components/cartItem";
+import CartItem from "../components/SingleCartItem";
 
 class cartScreen extends Component {
-
-render() {
-const result = this.props.cartItems;
+  render() {
+    const result = this.props.cartItems;
+    const total = this.props.total;
 
     return (
-
-      <View style={styles.container}>
-        <FlatList
-          data={result}
-          showsVerticalScrollIndicator={false}
-          keyExtractor={result => result.id.toString()}
-          renderItem={({ item }) => {
-            return (
-              <TouchableOpacity>
-                {result.length > 0 ?
-                <CartItem result={item}/>
-                  : <Text>No items in your cart</Text>
-                }
-              </TouchableOpacity>
-            );
-          }}
-        />
-      </View>
-
+      <Container style={styles.container}>
+        <Content>
+          <Card>
+            <CardItem>
+              <CardItem>
+                <Left>
+                  <Button transparent>
+                    <Icon active name="calculator" />
+                    <Text>RS: {total}</Text>
+                  </Button>
+                </Left>
+                <Body>
+                  <Button block style={{ backgroundColor: "#61005b" }}>
+                    <Icon type="Ionicons" name="checkmark" />
+                    <Text>Checkout</Text>
+                  </Button>
+                </Body>
+              </CardItem>
+            </CardItem>
+          </Card>
+          <FlatList
+            data={result}
+            showsVerticalScrollIndicator={false}
+            keyExtractor={result => result.id.toString()}
+            renderItem={({ item }) => {
+              return (
+                <TouchableOpacity>
+                  {result.length > 0 ? (
+                    <CartItem result={item} />
+                  ) : (
+                    <Text>No items in your cart</Text>
+                  )}
+                </TouchableOpacity>
+              );
+            }}
+          />
+          <Text></Text>
+        </Content>
+      </Container>
     );
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
-    cartItems: state
-  }
-}
+    cartItems: state.cart,
+    total: state.total
+  };
+};
 const styles = StyleSheet.create({
-  container:{
+  container: {
     marginTop: 10
   },
   image: {

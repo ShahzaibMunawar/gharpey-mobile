@@ -89,8 +89,7 @@ const CartStack = createStackNavigator({
       headerTintColor: "#fff",
       headerRight: () => <CartIcon />,
       headerStyle: {
-        backgroundColor: "#922c88",
-        color: "#ffffff"
+        backgroundColor: "#922c88"
       }
     }
   }
