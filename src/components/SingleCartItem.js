@@ -1,6 +1,7 @@
-import { REMOVE_FROM_CART } from "../../reducers/action";
+import { REMOVE_FROM_CART, AGJUST_PRICE } from "../../reducers/action";
 import React, { Component, useState } from "react";
 import { Text, View, Image, StyleSheet } from "react-native";
+
 import {
   Container,
   Header,
@@ -21,8 +22,14 @@ const singleCartItem = ({ navigation, dispatch, result }) => {
   const [value, setvalue] = useState();
   // const [result, setResult] = useState(null);
   // const result = this.props.result;
-  // console.log("res====");
-  console.log(value[0].value);
+  console.log("res====" + result);
+
+  if (value) {
+    var quantity = value.value;
+    // result.quantity = quantity;
+
+    console.log(quantity * result.price);
+  }
 
   var img =
     "http://sydiatech.com/" +
@@ -61,30 +68,24 @@ const singleCartItem = ({ navigation, dispatch, result }) => {
                 </Button>
                 <View style={{ flex: 1, flexDirection: "row", paddingTop: 7 }}>
                   <NumericInput
-                    value={value}
+                    value={value ? value.value : 1}
                     totalHeight={30}
                     maxValue={20}
                     rightButtonBackgroundColor={"white"}
                     leftButtonBackgroundColor={"white"}
-                    minValue={0}
+                    minValue={1}
                     initValue={1}
-                    onChange={value => setvalue({ value })}
+                    onChange={value => {
+                      setvalue({ value });
+                      result.quantity = value;
+                      console.log(result);
+                      console.log(result.price * result.quantity);
+                      dispatch({
+                        type: "AGJUST_PRICE",
+                        payload: result
+                      });
+                    }}
                   />
-                  {/* <Button transparent style={{ marginLeft: 30 }}>
-                    <Icon
-                      name="remove-circle-outline"
-                      style={{ fontSize: 20, color: "#a50016" }}
-                      type="MaterialIcons"
-                    />
-                  </Button>
-                  <Input style={{ paddingBottom: 5 }} />
-                  <Button transparent style={{ marginRight: 80 }}>
-                    <Icon
-                      name="control-point"
-                      style={{ fontSize: 20, color: "#a50016" }}
-                      type="MaterialIcons"
-                    />
-                  </Button> */}
                 </View>
               </View>
             </Body>

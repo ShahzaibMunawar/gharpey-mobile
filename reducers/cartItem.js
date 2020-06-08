@@ -1,4 +1,9 @@
-import { ADD_TO_CART, EMPTY_CART, REMOVE_FROM_CART } from "./action";
+import {
+  ADD_TO_CART,
+  EMPTY_CART,
+  REMOVE_FROM_CART,
+  AGJUST_PRICE
+} from "./action";
 const INIT = {
   cart: [],
   total: 0,
@@ -38,6 +43,24 @@ const cartItems = (state = INIT, action) => {
         cart: state.cart.filter(cartItem => {
           return cartItem.id !== action.payload.id;
         })
+      };
+    case "AGJUST_PRICE":
+      console.log("AGJUST_PRICE start");
+      console.log(
+        "This product total" + action.payload.price * action.payload.quantity
+      );
+      console.log("State Condition = ");
+      console.log(state.cart);
+      var temptotal = 0;
+      state.cart.map(product => {
+        console.log("product.price = " + product.price);
+        console.log("product.quantity = " + product.quantity);
+        temptotal = temptotal + product.price * product.quantity;
+      });
+      console.log("temptotal = " + temptotal);
+      return {
+        ...state,
+        total: temptotal
       };
   }
 

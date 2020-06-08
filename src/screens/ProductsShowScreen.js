@@ -63,7 +63,7 @@ const ProductsShowScreen = ({ navigation, dispatch }) => {
             <Left>
               <Button
                 block
-                style={{ width: "100%", backgroundColor: "#922c88" }}
+                style={{ width: "100%", backgroundColor: "#61005b" }}
                 onPress={() => dispatch({ type: "ADD_TO_CART", payload: id })}
               >
                 <Text>Add To Cart</Text>
