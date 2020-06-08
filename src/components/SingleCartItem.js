@@ -1,5 +1,5 @@
 import { REMOVE_FROM_CART } from "../../reducers/action";
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { Text, View, Image, StyleSheet } from "react-native";
 import {
   Container,
@@ -18,12 +18,12 @@ import {
 import NumericInput from "react-native-numeric-input";
 import { connect } from "react-redux";
 const singleCartItem = ({ navigation, dispatch, result }) => {
-  const [value, useValue] = useState(null);
-
+  const [value, setvalue] = useState();
   // const [result, setResult] = useState(null);
   // const result = this.props.result;
   // console.log("res====");
-  // console.log(result);
+  console.log(value[0].value);
+
   var img =
     "http://sydiatech.com/" +
     result.featured_image.replace("public", "storage");
@@ -59,12 +59,17 @@ const singleCartItem = ({ navigation, dispatch, result }) => {
                   />
                   <Text> Remove</Text>
                 </Button>
-                <View style={{ flex: 1, flexDirection: "row" }}>
+                <View style={{ flex: 1, flexDirection: "row", paddingTop: 7 }}>
                   <NumericInput
-                    value={this.state.value}
-                    onChange={value => this.setState({ value })}
+                    value={value}
+                    totalHeight={30}
+                    maxValue={20}
+                    rightButtonBackgroundColor={"white"}
+                    leftButtonBackgroundColor={"white"}
+                    minValue={0}
+                    initValue={1}
+                    onChange={value => setvalue({ value })}
                   />
-
                   {/* <Button transparent style={{ marginLeft: 30 }}>
                     <Icon
                       name="remove-circle-outline"
