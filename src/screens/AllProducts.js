@@ -29,10 +29,15 @@ const numColumns = 2;
 const AllProducts = ({ navigation, dispatch }) => {
   //we pass null in state when we dont have data by default
   // to get clicked bussiness id
+  console.log("In AllProducts");
   const result = navigation.getParam("results");
   const title = navigation.getParam("title");
+  console.log("results in all product");
+  console.log(result);
+  console.log(title);
   // console.log("results");
   // console.log(result);
+
   return (
     <View>
       <FlatList

@@ -6,10 +6,10 @@ import {
   StyleSheet,
   TouchableOpacity
 } from "react-native";
-import {Button} from "native-base";
+import { Button } from "native-base";
 import { FlatList } from "react-native-gesture-handler";
 import ResulsDetails from "./ResultsDetails";
-import { connect } from 'react-redux'
+import { connect } from "react-redux";
 import ProductsDetails from "./productsDetails";
 import { withNavigation } from "react-navigation";
 
@@ -21,9 +21,22 @@ const ProductsList = ({ title, results, navigation }) => {
   //   // }
   return (
     <View style={styles.container}>
-      <View style={{flex: 1,flexDirection: 'row',justifyContent: 'space-between', paddingLeft: 5,paddingRight:20}}>
-      <Text style={styles.title}>{title}</Text>
-        <Button transparent onPress={()=>navigation.navigate("AllProducts",{results,title})}><Text>See all ></Text></Button>
+      <View
+        style={{
+          flex: 1,
+          flexDirection: "row",
+          justifyContent: "space-between",
+          paddingLeft: 5,
+          paddingRight: 20
+        }}
+      >
+        <Text style={styles.title}>{title}</Text>
+        <Button
+          transparent
+          onPress={() => navigation.navigate("AllProducts", { results, title })}
+        >
+          <Text>See all ></Text>
+        </Button>
       </View>
       <FlatList
         horizontal
@@ -33,9 +46,11 @@ const ProductsList = ({ title, results, navigation }) => {
         renderItem={({ item }) => {
           return (
             <TouchableOpacity
-              onPress={() => navigation.navigate("ProductsShowScreen", { item })}
+              onPress={() =>
+                navigation.navigate("ProductsShowScreen", { item })
+              }
             >
-              <ProductsDetails  result={item}   />
+              <ProductsDetails result={item} />
             </TouchableOpacity>
           );
         }}
@@ -43,7 +58,6 @@ const ProductsList = ({ title, results, navigation }) => {
     </View>
   );
 };
-
 
 const styles = StyleSheet.create({
   title: {

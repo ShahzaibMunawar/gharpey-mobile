@@ -13,29 +13,25 @@ const INIT = {
 const cartItems = (state = INIT, action) => {
   switch (action.type) {
     case ADD_TO_CART:
-      // console.log("InAddToCart");
-      console.log(action.payload);
-      // let addedItem = state.cart.find(item => {
-      //   if (item.id === action.payload.id) {
-      //     console.log("found" + item.id);
-      //   } else {
-      //     console.log("not ");
-      //   }
-      // });
-
-      // console.log(addedItem);
+      var flag = true;
       state.cart.map(item => {
         if (action.payload.id === item.id) {
           console.log("value already exist");
+          flag = false;
         } else {
           console.log("New value");
         }
       });
-      return {
-        ...state,
-        cart: [action.payload, ...state.cart],
-        total: state.total + action.payload.price
-      };
+      console.log(flag);
+      if (flag) {
+        return {
+          ...state,
+          cart: [action.payload, ...state.cart],
+          total: state.total + action.payload.price
+        };
+      } else {
+        return state;
+      }
     case REMOVE_FROM_CART:
       return {
         ...state,
@@ -45,25 +41,24 @@ const cartItems = (state = INIT, action) => {
         })
       };
     case "AGJUST_PRICE":
-      console.log("AGJUST_PRICE start");
-      console.log(
-        "This product total" + action.payload.price * action.payload.quantity
-      );
-      console.log("State Condition = ");
-      console.log(state.cart);
+      // console.log("AGJUST_PRICE start");
+      // console.log(
+      //   "This product total" + action.payload.price * action.payload.quantity
+      // );
+      // console.log("State Condition = ");
+      // console.log(state.cart);
       var temptotal = 0;
       state.cart.map(product => {
-        console.log("product.price = " + product.price);
-        console.log("product.quantity = " + product.quantity);
+        // console.log("product.price = " + product.price);
+        // console.log("product.quantity = " + product.quantity);
         temptotal = temptotal + product.price * product.quantity;
       });
-      console.log("temptotal = " + temptotal);
+      // console.log("temptotal = " + temptotal);
       return {
         ...state,
         total: temptotal
       };
   }
-
   return state;
 };
 

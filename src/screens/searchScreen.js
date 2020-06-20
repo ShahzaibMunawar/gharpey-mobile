@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import yelp from "../api/yelpProducts";
 import {
   View,
   Text,
@@ -25,28 +26,32 @@ import { withNavigation } from "react-navigation";
 import SearchBar from "../components/SearchBar";
 import Swiper from "react-native-swiper";
 
-const searchScreen = () => {
+const searchScreen = ({ navigation }) => {
   console.disableYellowBox = true;
   const [term, setTerm] = useState("");
-  // const [searchApi, errorMsg, results] = useResults();
+  const [SearchResponse, setSearchResponse] = useState([]);
+
   const [searchApi, errorMsg, results] = useProducts();
-  // console.log("Products Results == "+results[0]);
-  //   console.log("Response data ==");
-  //   console.log(Object.keys(results).length);
-
-  results.forEach(function(item, i) {
-    // console.log(item);
-  });
-
-  // var itemCount = Object.keys(results).length;
-  // console.log("itemCount == " + itemCount)
-  // const filterResultByPrice = price => {
-  //   return results.filter(result => {
-  //     return result.price === price;
-  //
-  //   });
-  // };
-
+  const SearchQuery = async searchTerm => {
+    try {
+      const response = await yelp.get("/search?q=" + searchTerm);
+      var results = response.data;
+      var title = searchTerm;
+      setSearchResponse(results);
+      console.log(results);
+      console.log("SearchResponse just after setting value is");
+      console.log(SearchResponse);
+      console.log("Before AllProducts");
+      var run = () => {
+        navigation.navigate("AllProducts", { results, title });
+      };
+      run();
+      console.log("After AllProducts");
+    } catch (err) {
+      seterrorMsg("Something went Wrong");
+    }
+    console.log("try catch end =======");
+  };
   return (
     <Container>
       <Header style={{ backgroundColor: "#922c88" }}>
@@ -63,9 +68,9 @@ const searchScreen = () => {
       <>
         <View style={{ backgroundColor: "#6b2063" }}>
           <SearchBar
-          // term={term}
-          // onTermChange={setTerm}
-          // onTermSubmit={() => searchApi(term)}
+            term={term}
+            onTermChange={setTerm}
+            onTermSubmit={() => SearchQuery(term)}
           />
         </View>
 

@@ -37,7 +37,11 @@ class cartScreen extends Component {
                   </Button>
                 </Left>
                 <Body>
-                  <Button block style={{ backgroundColor: "#61005b" }}>
+                  <Button
+                    onPress={this.onCheckoutButtonPress.bind(this)}
+                    block
+                    style={{ backgroundColor: "#61005b" }}
+                  >
                     <Icon type="Ionicons" name="checkmark" />
                     <Text>Checkout</Text>
                   </Button>
@@ -65,6 +69,31 @@ class cartScreen extends Component {
         </Content>
       </Container>
     );
+  }
+  onCheckoutButtonPress() {
+    var checkoutItems = "";
+    var checkoutQuantity = "";
+
+    this.props.cartItems.map(item => {
+      checkoutQuantity = checkoutQuantity + item.quantity + ",";
+      checkoutItems = checkoutItems + item.id + ",";
+      // checkoutItems =
+      //   checkoutItems + "item=" + item.id + "&quantity=" + item.quantity + ",";
+    });
+    checkoutQuantity = checkoutQuantity.substring(
+      0,
+      checkoutQuantity.length - 1
+    );
+    checkoutItems = checkoutItems.substring(0, checkoutItems.length - 1);
+    checkoutItems = checkoutItems + "&";
+    console.log(
+      "https://sydiatech.com/cart/?item=" +
+        checkoutItems +
+        "&quantity=" +
+        checkoutQuantity
+    );
+    checkoutItems = "";
+    checkoutQuantity = "";
   }
 }
 

@@ -22,13 +22,13 @@ const singleCartItem = ({ navigation, dispatch, result }) => {
   const [value, setvalue] = useState();
   // const [result, setResult] = useState(null);
   // const result = this.props.result;
-  console.log("res====" + result);
+  // console.log("res====" + result);
 
   if (value) {
     var quantity = value.value;
     // result.quantity = quantity;
 
-    console.log(quantity * result.price);
+    // console.log(quantity * result.price);
   }
 
   var img =
@@ -78,8 +78,8 @@ const singleCartItem = ({ navigation, dispatch, result }) => {
                     onChange={value => {
                       setvalue({ value });
                       result.quantity = value;
-                      console.log(result);
-                      console.log(result.price * result.quantity);
+                      // console.log(result);
+                      // console.log(result.price * result.quantity);
                       dispatch({
                         type: "AGJUST_PRICE",
                         payload: result

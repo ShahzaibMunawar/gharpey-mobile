@@ -22,7 +22,7 @@ const ProductsShowScreen = ({ navigation, dispatch }) => {
   var img = id.featured_image.replace("public", "storage/");
   var shopimg =
     "http://sydiatech.com/" + id.seller.shop_image.replace("public", "storage");
-  console.log(shopimg);
+  // console.log(shopimg);
   var rev: rev[];
   // console.log(shopimg);
   return (
