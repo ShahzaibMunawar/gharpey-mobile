@@ -30,7 +30,6 @@ const styles = {
     paddingLeft: 5,
     fontSize: 18,
     height: 20,
-    // marginHorizontal: 35,
     lineHeight: 18,
     flex: 2
   },

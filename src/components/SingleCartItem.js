@@ -31,9 +31,17 @@ const singleCartItem = ({ navigation, dispatch, result }) => {
     // console.log(quantity * result.price);
   }
 
-  var img =
-    "http://sydiatech.com/" +
-    result.featured_image.replace("public", "storage");
+  // var img =
+  //   "http://sydiatech.com/" +
+  //   result.featured_image.replace("public", "storage");
+
+  if (result.featured_image != null) {
+    var img =
+      "http://sydiatech.com/" +
+      result.featured_image.replace("public", "storage");
+  } else {
+    img = "https://www.wpclipart.com/buildings/shop.png";
+  }
   return (
     <Container style={{ height: 135 }}>
       <Content>

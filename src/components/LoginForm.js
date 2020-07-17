@@ -106,7 +106,7 @@ class LoginForm extends Component {
           <Content padder>
             <Card
               style={{
-                height: 420,
+                height: 320,
                 width: 410,
                 marginTop: 200,
                 marginLeft: 15
@@ -114,15 +114,13 @@ class LoginForm extends Component {
             >
               <CardItem
                 style={{
-                  display: "flex",
-                  marginTop: 25,
-                  alignItems: "center"
+                  flex: 1,
+                  marginTop: 25
                 }}
               >
-                <Content>
+                <Body style={{ paddingVertical: 20 }}>
                   <Text style={styles.text1}>Login</Text>
                   <Text style={styles.text2}>Login to your account</Text>
-
                   <Input
                     value={this.state.email}
                     secureTextEntry={false}
@@ -130,7 +128,6 @@ class LoginForm extends Component {
                     placeholder="user@gmail.com"
                     label="Username"
                   />
-
                   <Input
                     style={styles.inputField}
                     label="Password"
@@ -147,7 +144,7 @@ class LoginForm extends Component {
                   >
                     <Text style={styles.Loginbtn}>Login</Text>
                   </Button>
-                </Content>
+                </Body>
               </CardItem>
             </Card>
           </Content>
@@ -170,15 +167,15 @@ const styles = StyleSheet.create({
   },
   errorStyle: {
     fontSize: 20,
-    alignSelf: "center",
+    // alignSelf: "center",
     color: "red"
   },
   Loginbtn: {
     backgroundColor: "#61215b"
   },
   inputField: {
-    justifyContent: "center"
+    // justifyContent: "center"
   },
-  text1: { textAlign: "center", fontSize: 25, fontWeight: "bold" },
-  text2: { textAlign: "center", color: "#999999", marginBottom: 60 }
+  text1: { fontSize: 25, fontWeight: "bold", paddingLeft: 150 },
+  text2: { color: "#999999", marginBottom: 60, paddingLeft: 110 }
 });

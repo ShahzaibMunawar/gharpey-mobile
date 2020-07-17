@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, StyleSheet, TouchableOpacity } from "react-native";
+import { View, StyleSheet, TouchableOpacity, WebView } from "react-native";
 import {
   Container,
   Header,
@@ -77,8 +77,6 @@ class cartScreen extends Component {
     this.props.cartItems.map(item => {
       checkoutQuantity = checkoutQuantity + item.quantity + ",";
       checkoutItems = checkoutItems + item.id + ",";
-      // checkoutItems =
-      //   checkoutItems + "item=" + item.id + "&quantity=" + item.quantity + ",";
     });
     checkoutQuantity = checkoutQuantity.substring(
       0,
@@ -86,14 +84,16 @@ class cartScreen extends Component {
     );
     checkoutItems = checkoutItems.substring(0, checkoutItems.length - 1);
     checkoutItems = checkoutItems + "&";
-    console.log(
+    var URL =
       "https://sydiatech.com/cart/?item=" +
-        checkoutItems +
-        "&quantity=" +
-        checkoutQuantity
-    );
+      checkoutItems +
+      "quantity=" +
+      checkoutQuantity;
+    console.log(URL);
     checkoutItems = "";
     checkoutQuantity = "";
+
+    this.props.navigation.navigate("Browser", { url: URL });
   }
 }
 

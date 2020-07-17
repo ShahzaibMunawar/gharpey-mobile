@@ -20,9 +20,19 @@ const ProductsShowScreen = ({ navigation, dispatch }) => {
   // to get clicked bussiness id
   const id = navigation.getParam("item");
   var img = id.featured_image.replace("public", "storage/");
-  var shopimg =
-    "http://sydiatech.com/" + id.seller.shop_image.replace("public", "storage");
-  // console.log(shopimg);
+
+  console.log("id====");
+  console.log(id);
+  if (id.seller.shop_image != null) {
+    var shopimg =
+      "http://sydiatech.com/" +
+      id.seller.shop_image.replace("public", "storage");
+  } else {
+    shopimg = "https://www.wpclipart.com/buildings/shop.png";
+  }
+  // var shopimg =
+  //   "http://sydiatech.com/" + id.seller.shop_image.replace("public", "storage");
+  console.log(shopimg);
   var rev: rev[];
   // console.log(shopimg);
   return (
@@ -71,8 +81,10 @@ const ProductsShowScreen = ({ navigation, dispatch }) => {
             </Left>
           </CardItem>
         </Card>
-        <Card style={{ paddingLeft: 15 }}>
-          <Text style={{ fontWeight: "bold" }}>Product Reviews </Text>
+        <Card style={{ paddingLeft: 15, paddingVertical: 20 }}>
+          <Text style={{ fontWeight: "bold", paddingBottom: 5 }}>
+            Product Reviews
+          </Text>
           {id.reviews.map(reviewobj => (
             <Text style={{ paddingVertical: 10 }} key={reviewobj}>
               {reviewobj.review}

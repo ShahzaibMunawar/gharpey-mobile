@@ -8,9 +8,11 @@ import ProductsShowScreen from "./src/screens/ProductsShowScreen";
 import searchScreen from "./src/screens/searchScreen";
 import CartIcon from "./src/components/CartIcon";
 import cartScreen from "./src/screens/cartScreen";
+import Browser from "./src/screens/Browser";
 import AllProducts from "./src/screens/AllProducts";
 import ProfileScreen from "./src/screens/ProfileScreen";
 import OrderScreen from "./src/screens/OrderScreen";
+import UserOrderDetails from "./src/screens/UserOrderDetails";
 import LoginForm from "./src/components/LoginForm";
 
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -69,7 +71,7 @@ const ProfileStack = createStackNavigator({
 });
 const OrderStack = createStackNavigator({
   order: {
-    screen: OrderScreen,
+    screen: UserOrderDetails,
     navigationOptions: {
       headerTitle: "My Orders",
       headerTintColor: "#fff",
@@ -91,6 +93,12 @@ const CartStack = createStackNavigator({
       headerStyle: {
         backgroundColor: "#922c88"
       }
+    }
+  },
+  Browser: {
+    screen: Browser,
+    navigationOptions: {
+      headerShown: false
     }
   }
 });
